@@ -1,0 +1,67 @@
+<div class="form">
+    <h2 id="registration">Registration Form</h2>
+    <form (ngSubmit)="onSubmit(myform,myform.value)" #myform="ngForm">
+
+        <div ngModelGroup="personDetails" #personDetail="ngModelGroup" >
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="Your name.." name="firstname" ngModel required #fname="ngModel"
+>
+            <div>
+                <small *ngIf="fname.invalid && fname.touched">First Name is a required field</small>
+            </div>
+
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Your last name.." name="lastname" ngModel required #lastnames="ngModel">
+            <div>
+                <small *ngIf="lastnames.invalid && lastnames.touched">Last Name is Required</small>
+            </div>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your last email.." name="email" ngModel required #emails="ngModel" >
+
+            <!-- <div *ngIf="!personDetail.valid && personDetail.touched">
+                <small>Some of the required fields does not have valid value.</small>
+            </div>
+            <button>Set Default Values</button> -->
+        </div>
+
+        <label for="country">Country</label>
+        <select id="country" name="country" ngModel>
+            <option value="australia" ngModel>Australia</option>
+            <option value="canada" ngModel>Canada</option>
+            <option value="usa" ngModel>USA</option>
+            <option value="india" ngModel>India</option>
+            <option value="uk" ngModel>UK</option>
+        </select>
+<hr>
+        <label for="gender">Gender:</label>&nbsp;
+        <span *ngFor="let gen of gender">
+            <input type="radio" id="{{gen.id}}" value="{{gen.value}}" name="gender" ngModel>
+            &nbsp;<label>{{gen.value}}</label>
+        </span>
+
+<hr>
+        <div class="mb-3">
+            <label for="pfp" class="form-label">Upload your Profile Picture :</label>
+            <input type="file" class="form-control" name="photo" id="pfp" accept="image/*" hidden
+                (change)="onChange($event)" ngModel>
+        </div>
+        <br><br>
+        <label>Hobbies <i>(Optional)</i></label>
+        <div class="form-inline">
+            <label><input type="checkbox" value="sports" name="hobbies" ngModel> Sports</label>&nbsp;
+            <label><input type="checkbox" value="movies" name="hobbies" ngModel> Movies</label>&nbsp;
+            <label><input type="checkbox" value="music" name="hobbies" ngModel> Music</label>&nbsp;
+        </div>
+        <input type="submit" value="Submit" id="btn" [disabled]="!myform.valid">
+    </form>
+</div>
+
+<div class="form-data">
+    <h3>Form Data</h3>
+    <p>First Name: <b>{{firstname}}</b></p>
+    <p>Last Name: <b>{{lastname}}</b></p>
+    <p>Email: <b>{{email}}</b></p>
+    <p>Country: <b>{{Country}}</b></p>
+    <p>Gender: <b>{{Gen}}</b></p>
+</div>
